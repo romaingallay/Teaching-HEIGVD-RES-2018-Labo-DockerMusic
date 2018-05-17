@@ -17,12 +17,13 @@ var uuid = require('uuid');
 /*
  * A map containing the instrument with its sound 
  */
-var instruments = new Map();
-instruments.set("piano", "ti-ta-ti");
-instruments.set("trumpet", "pouet");
-instruments.set("flute", "trulu");
-instruments.set("violin", "gzi-gzi");
-instruments.set("drum", "boum-boum");
+var instruments = new Map([
+	["piano", "ti-ta-ti"],
+	["trumpet", "pouet"],
+	["flute", "trulu"],
+	["violin", "gzi-gzi"],
+	["drum", "boum-boum"]
+]);
 
 
 function Musician(instrument) {
