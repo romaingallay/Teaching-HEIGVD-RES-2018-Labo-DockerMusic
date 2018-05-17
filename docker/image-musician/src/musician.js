@@ -15,7 +15,7 @@ var s = dgram.createSocket('udp4');
  */
 var uuid = require('uuid');
 /*
- * A map containing the instrument with its sound 
+ * A map containing the instruments with their sound 
  */
 var instruments = new Map([
 	["piano", "ti-ta-ti"],

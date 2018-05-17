@@ -45,18 +45,22 @@ s.on('message', function(msg, source) {
     addOrUpdateMusician(musician);
 });
 
+/*
+ * Create TCP server listening to port 2205, send the musicians array to anyone connecting
+ */
 var serverTCP = net.createServer((socket) => {
     console.log("TCP request received, sending active musicians...");
 
     musiciansControl();
-    socket.write(JSON.stringify(musicians));
-    socket.pipe(socket);
-    socket.end(); // replace by socket.end(jsonshit) ? instead of write, pipe, end
+    socket.end(JSON.stringify(musicians));
 
-}).listen(2205, '0.0.0.0'); // try without 0.0.0.0
+}).listen(2205);
 
 console.log('Server TCP listening on port 2205');
 
+/*
+ * Remove a musician from the musicians array if it has been inactive for more than 5sec
+ */ 
 function musiciansControl(){
     var now = Date.now();
     for(var i = 0;  i < musicians.length; ++i){
@@ -66,8 +70,10 @@ function musiciansControl(){
     }
 }
 
+/*
+ * Add a musician if it is not in the musicians array yet, update its activeSince otherwise
+ */
 function addOrUpdateMusician(musician){
-
     var newMusician = true;
 
     for(var i = 0; i < musicians.length; ++i){
@@ -76,7 +82,6 @@ function addOrUpdateMusician(musician){
             newMusician = false;
         }
     }
-
     if(newMusician){
         musicians.push(musician);
     }
